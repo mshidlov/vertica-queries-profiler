@@ -1,0 +1,8 @@
+﻿{ 
+  "host": "127.0.0.1",
+  "port": 5433,
+  "user": "dbadmin", 
+  "password": "dbadmin", 
+  "database": "db", 
+  "ssl": false
+}

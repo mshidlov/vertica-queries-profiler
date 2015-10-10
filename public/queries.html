@@ -1,0 +1,50 @@
+﻿<table>
+    <thead>
+        <tr>
+            <th ng-click="sort('user_name')">user name</th>
+            <th ng-click="sort('start_timestamp')">start timestamp</th>
+            <th ng-click="sort('end_timestamp')">end timestamp</th>
+            <th ng-click="sort('request_duration_ms')">request duration ms</th>
+            <th ng-click="sort('is_executing')">is executing</th>
+            <th ng-click="sort('request')">query</th>
+            <th ng-click="sort('memory_acquired_mb')">memory acquired mb</th>
+        </tr>
+        <tr>
+            <th><input ng-model="search.user_name"></th>
+            <th><input ng-model="search.start_timestamp"></th>
+            <th><input ng-model="search.end_timestamp"></th>
+            <th><input ng-model="search.request_duration_ms"></th>
+            <th><input ng-model="search.is_executing"></th>
+            <th><input ng-model="search.request"></th>
+            <th><input ng-model="search.memory_acquired_mb"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="query in queries | filter:search:strict | orderBy:order" class="query" ng-click="queryProfile(query.transaction_id,query.statement_id,query.request)">
+            <td>{{query.user_name}}</td>
+            <td>{{query.start_timestamp}}</td>
+            <td>{{query.end_timestamp}}</td>
+            <td>{{query.request_duration_ms}}</td>
+            <td>{{query.is_executing}}</td>
+            <td>{{query.request}}</td>
+            <td>{{query.memory_acquired_mb}}</td>
+        </tr>
+    </tbody>
+</table>
+        <!--end_timestamp: "2015-10-04 02:30:06.624677"
+        error_count: 0
+        is_executing: "f"
+        memory_acquired_mb: 0
+        node_name: "v_tapdb_node0001"
+        request: "INSERT /*+DIRECT*/ INTO taptica.HitsStaging_worktable SELECT Stage.HitGuid, Stage.HitType, Stage.CreatedAt, h.IID, OffersLK.AppId, h.IpAddress, h.ClientIP, h.ClientCountryCode, h.CityName, h.Currency, h.Resolution, h.AdScreenMode, h.CampaignType, h.SearchKeyword, h.Interests, FilesLK.Width, FilesLK.Height, h.Localization, h.NetType, Stage.ClientTime, h.PhoneModelId, h.AgentPlatform, h.AccountId, h.BlingApplicationGuid, h.TenantId, h.ExcludedCategories, Stage.OfferId, CASE WHEN (Stage.HitType = 'Impression') THEN CASE When ((CASE WHEN Stage.PayoutType is not NULL Then Stage.PayoutType ELSE CASE When Price.PayoutType is not NULL Then Price.PayoutType ELSE OffersLK.PayoutType END END) <> 'CPM') Then 0 When (Stage.Payout is not null) Then Stage.Payout/1000 When (FilesLK.CreativeType ilike 'Banner') Then CASE When Price.BannerPayout >0 THEN Price.BannerPayout/1000 ELSE CASE WHEN Price.Payout>0 Then Price.Payout/1000 ELSE OffersLK.Payout/1000 END END When (FilesLK.CreativeType ilike 'FullScreen') Then CASE When Price.FullScreenPayout >0 THEN Price.FullScreenPayout/1000 ELSE CASE WHEN Price.Payout>0 Then Price.Payout/1000 ELSE OffersLK.Payout/1000 END END When (FilesLK.CreativeType ilike 'Video') Then CASE When Price.VideoPayout >0 THEN Price.VideoPayout/1000 ELSE CASE WHEN Price.Payout>0 Then Price.Payout/1000 ELSE OffersLK.Payout/1000 END END ELSE CASE WHEN Price.Payout>0 Then Price.Payout/1000 ELSE OffersLK.Payout/1000 END END -- as Payout_Impression WHEN (Stage.HitType = 'Click') THEN CASE When ((CASE WHEN Stage.PayoutType is not NULL Then Stage.PayoutType ELSE CASE When Price.PayoutType is not NULL Then Price.PayoutType ELSE OffersLK.PayoutType END END) <> 'CPC') Then 0 When (Stage.Payout is not null) Then Stage.Payout When (FilesLK.CreativeType ilike 'Banner') Then CASE When Price.BannerPayout >0 THEN Price.BannerPayout ELSE CASE WHEN Price.Payout>0 Then Price.Payout ELSE OffersLK.Payout END END When (FilesLK.CreativeType ilike 'FullScreen') Then CASE When Price.FullScreenPayout >0 THEN Price.FullScreenPayout ELSE CASE WHEN Price.Payout>0 Then Price.Payout ELSE OffersLK.Payout END END When (FilesLK.CreativeType ilike 'Video') Then CASE When Price.VideoPayout >0 THEN Price.VideoPayout ELSE CASE WHEN Price.Payout>0 Then Price.Payout ELSE OffersLK.Payout END END ELSE CASE WHEN Price.Payout>0 Then Price.Payout ELSE OffersLK.Payout END END -- as Payout_Click ELSE NULL END as Payout, CASE WHEN (Stage.HitType = 'Impression') THEN CASE When ((CASE WHEN Stage.RevenueType is not NULL Then Stage.RevenueType ELSE CASE When Price.RevenueType is not NULL Then Price.RevenueType ELSE OffersLK.RevenueType END END) <> 'RPM') Then 0 When (Stage.Revenue is not null) Then Stage.Revenue/1000 When (FilesLK.CreativeType ilike 'Banner') Then CASE When Price.BannerRevenue >0 … END END ELSE CASE WHEN Price.Revenue>0 Then Price.Revenue ELSE OffersLK.Revenue END END -- as Revenue_Click ELSE NULL END as Revenue, Stage.OfferFileId, h.Referral, -- maybe to remove h.AffAppName, h.AffSub, h.AffBid, h.AffSource, NULL as AdvSub, OffersLK.AdvertiserId as AdvId, NULL as GoalId, NULL as ClickCost, -- maybe to remove NULL as Amount, NULL as ExtPub, -- maybe to remove h.RespType, OffersLK.OfferType, Stage.placeHolder, Stage.placeHolder1, Stage.placeHolder2, Stage.placeHolder3, Stage.placeHolder4, h.DeviceModelId, h.ModelName, h.DeviceRootId, h.MobileBrowser, h.DeviceOS, h.DeviceOSVersion, h.MarketingName, h.MobileBrowserVersion, h.IsTablet, h.IsWirelessDevice, h.AcceptThirdPartyCookie, h.CookieSupport, h.Wifi, h.JPG, h.GIF, h.PNG, h.TIFF, h.IPNumber, -- maybe rename to placeholder h.DomainName, h.Region, h.ZipCode, h.Latitude, h.Longitude, h.AreaCode, h.IDDCode, h.DmaCode, h."TimeZone", h.ISP, h.MCC, h.MNC, h.Fingerprint,-- maybe rename to placeholder h.Cookie, h.OfferProviderId, h.AffId, FilesLK.CreativeType, h.RtbNetwork, Stage.hasRequest, Stage.placeHolder5, Stage.placeHolder6, Stage.placeHolder7, Stage.placeHolder8, CASE WHEN Stage.PayoutType is not NULL Then Stage.PayoutType ELSE CASE When Price.PayoutType is not NULL Then Price.PayoutType ELSE OffersLK.PayoutType END END as PayoutType, CASE WHEN Stage.RevenueType is not NULL Then Stage.RevenueType ELSE CASE When Price.RevenueType is not NULL Then Price.RevenueType ELSE OffersLK.RevenueType END END as RevenueType, h.PipelineData, Stage.AffCustomData, Stage.ExtendedData, h.UserAgent, h.DeviceIdsStr, h.AffImpId, h.AffSubId, NULL as IsRepeated, NULL as IsDelayedGoal, Stage.CreatedAtDate, Stage.HitHour, OffersLK.AdvertiserAppId as AdvAppId, Stage.YearOfBirth, Stage.Gender, NULL as RetargetingInd, row_number() OVER (PARTITION BY Stage.HitGuid) AS countGuid, h.Traffic, h.PubId, Stage.placeHolder9, AffiliatesLK.NetworkId, Stage.placeHolder11, Stage.placeHolder12, Stage.placeHolder13, Stage.placeHolder14, Stage.placeHolder15, Stage.placeHolder16, Stage.placeHolder17, Stage.placeHolder18, Stage.placeHolder19, Stage.placeHolder20, True as FoundRequest, CASE WHEN ( OffersLK.AppId IS NULL OR FilesLK.Width IS NULL OR FilesLK.Height IS NULL OR OffersLK.AdvertiserId IS NULL OR OffersLK.OfferType IS NULL OR FilesLK.CreativeType IS NULL OR OffersLK.AdvertiserAppId IS NULL ) THEN TRUE ELSE FALSE END AS toPending, Stage.AffClickId, Stage.RequestUrl, Stage.PostbackUrl, Stage.LandingPage FROM taptica.HitsStaging Stage JOIN taptica.HitsRequest h ON Stage.HitGuid = h.HitGuid LEFT OUTER JOIN taptica.OffersLK on OffersLK.Id = Stage.OfferId LEFT OUTER JOIN taptica.FilesLK on FilesLK.Id = Stage.OfferFileId LEFT OUTER JOIN taptica.AffiliatesLK on AffiliatesLK.Id = Stage.AffId LEFT OUTER JOIN taptica.PricingData Price on Price.OfferId = Stage.OfferId AND Price.AffId = Stage.AffId WHERE Stage.HitType = 'Impression' --AND Stage.HasRequest = 'True' AND h.CreatedAtDate >= '2015-10-03 23:30:02.179314'::DATE --AND h.CreatedAt >= '2015-10-03 23:30:02.179314' "
+        request_duration_ms: 746
+        request_id: 13
+        request_label: ""
+        request_type: "QUERY"
+        search_path: ""$user", public, v_catalog, v_monitor, v_internal"
+        session_id: "cache5-20902:0x6eb62c"
+        start_timestamp: "2015-10-04 02:30:05.878516"
+        statement_id: 5
+        success: "t"
+        transaction_id: 45035996284100456
+        user_name: "dbadmin"-->

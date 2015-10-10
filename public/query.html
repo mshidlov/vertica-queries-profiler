@@ -1,0 +1,116 @@
+﻿<div>
+    <h3>query</h3>
+    <div ng-hide="queryText" class="spinner"></div>
+    <table ng-show="queryText">
+        <thead>
+        </thead>
+        <tbody>
+
+            <tr ng-repeat="query in queryText" class="query">
+                <td>{{query.request}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>query execution steps</h3>
+    <div ng-hide="queryExecutionSteps" class="spinner"></div>
+    <table ng-show="queryExecutionSteps">
+        <thead>
+            <tr>
+                <th>execution step</th>
+                <th>elapsed</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr ng-repeat="query in queryExecutionSteps" class="query">
+                <td>{{query.execution_step}}</td>
+                <td>{{query.elapsed}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>query memory allocated</h3>
+    <div ng-hide="queryMemoryAllocated" class="spinner"></div>
+    <table ng-show="queryMemoryAllocated">
+        <thead>
+            <tr>
+                <th>node name</th>
+                <th>request type</th>
+                <th>pool name</th>
+                <th>memory(kb)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="query in queryMemoryAllocated" class="query">
+                <td>{{query.node_name}}</td>
+                <td>{{query.request_type}}</td>
+                <td>{{query.pool_name}}</td>
+                <td>{{query.memory_kb}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>query paln</h3>
+    <div ng-hide="queryPaln" class="spinner"></div>
+    <table ng-show="queryPaln">
+        <thead>
+        </thead>
+        <tbody>
+            <tr ng-repeat="query in queryPaln">
+                <td>{{query.path_line}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>query paln memory allocated</h3>
+    <div ng-hide="queryPalnMemoryAllocated" class="spinner"></div>
+    <table ng-show="queryPalnMemoryAllocated">
+        <thead>
+            <tr>
+                <th> path id </th>
+                <th> running time </th>
+                <th> memory allocated bytes </th>
+                <th> path line </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="query in queryPalnMemoryAllocated" class="query">
+                <td>{{query.path_id}}</td>
+                <td>{{query.running_time}}</td>
+                <td>{{query.memory_allocated_bytes}}</td>
+                <td>{{query.path_line}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h3>query events</h3>
+    <div ng-hide="queryEvents" class="spinner"></div>
+    <table ng-show="queryMemoryAllocated">
+        <thead>
+            <tr>
+                <th>event timestamp</th>
+                <th>node name</th>
+                <th>event category</th>
+                <th>event type</th>
+                <th>event description</th>
+                <th>operator name</th>
+                <th>path id</th>
+                <th>event details</th>
+                <th>suggested action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="query in queryEvents" class="query">
+                <td>{{query.event_timestamp}}</td>
+                <td>{{query.node_name}}</td>
+                <td>{{query.event_category}}</td>
+                <td>{{query.event_type}}</td>
+                <td>{{query.event_description}}</td>
+                <td>{{query.operator_name}}</td>
+                <td>{{query.path_id}}</td>
+                <td>{{query.event_details}}</td>
+                <td>{{query.suggested_action}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
